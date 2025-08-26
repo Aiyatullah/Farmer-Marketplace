@@ -63,7 +63,7 @@ export function AuthForm() {
     
     try {
       // Create account
-      const result = await authClient.signUp.email({ email, password, name });
+      await authClient.signUp.email({ email, password, name });
       // Sign in after successful signup (saves token via auth client onSuccess)
       await authClient.signIn.email({ email, password });
       // Assign role now that the token is present

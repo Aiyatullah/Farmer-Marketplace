@@ -1,4 +1,3 @@
-import { MainNav } from "@/components/MainNav";
 import { ArrowRight, ShoppingCart, LayoutDashboard } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { auth } from "@/../lib/auth";

@@ -2,6 +2,7 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -370,10 +371,12 @@ export default function MarketPage() {
                   >
                     <div className="flex items-center gap-4">
                       <div className="relative h-16 w-16 rounded-md overflow-hidden">
-                        <img
+                        <Image
                           src={item.product.image || PLACEHOLDER_IMAGE}
                           alt={item.product.name}
-                          className="h-16 w-16 object-cover"
+                          fill
+                          sizes="64px"
+                          className="object-cover"
                         />
                       </div>
                       <div>
@@ -443,10 +446,12 @@ export default function MarketPage() {
                 <div className="space-y-4">
                   <div className="rounded-md overflow-hidden">
                     <AspectRatio ratio={4 / 3}>
-                      <img
+                      <Image
                         src={quickView.image || PLACEHOLDER_IMAGE}
                         alt={quickView.name}
-                        className="h-full w-full object-cover"
+                        fill
+                        sizes="(max-width: 768px) 100vw, 400px"
+                        className="object-cover"
                       />
                     </AspectRatio>
                   </div>
@@ -521,10 +526,12 @@ export default function MarketPage() {
                     <CardHeader className="p-0">
                       <div className="relative">
                         <AspectRatio ratio={4 / 3}>
-                          <img
+                          <Image
                             src={product.image || PLACEHOLDER_IMAGE}
                             alt={product.name}
-                            className="h-full w-full object-cover"
+                            fill
+                            sizes="(max-width: 768px) 100vw, 400px"
+                            className="object-cover"
                           />
                         </AspectRatio>
                         <Button

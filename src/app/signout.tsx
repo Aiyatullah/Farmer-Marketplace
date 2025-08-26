@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import { LogOut } from "lucide-react";
 import { authClient } from "../../lib/auth-client";
 import { Button } from "@/components/ui/button";

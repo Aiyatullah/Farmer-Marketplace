@@ -1,7 +1,6 @@
 "use client";
 
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "./ui/card";
-import { Badge } from "./ui/badge";
+import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
 import { Button } from "./ui/button";
 import { Calendar, Package, Clock } from "lucide-react";
 import Link from "next/link";
