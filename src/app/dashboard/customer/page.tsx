@@ -53,7 +53,6 @@ export default function CustomerDashboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [name, setName] = useState("Customer");
-  const [role, setRole] = useState<string>("CUSTOMER");
   const router = useRouter();
 
   // Role guard: ensure only CUSTOMER stays here
@@ -88,7 +87,6 @@ export default function CustomerDashboard() {
           return;
         }
         setName(data.session?.user?.name || "Customer");
-        setRole(r);
       } catch {
         router.replace("/");
       }
@@ -109,7 +107,6 @@ export default function CustomerDashboard() {
         console.log("Orders API Response:", data); // Debug log
         setOrders(data.orders || []);
         setName(data.user?.name || "Customer");
-        setRole(data.user?.role || "CUSTOMER");
       } catch (err) {
         setError(err instanceof Error ? err.message : "An error occurred");
       } finally {
@@ -129,30 +126,6 @@ export default function CustomerDashboard() {
       window.history.replaceState({}, document.title, window.location.pathname);
     }
   }, []);
-
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-  };
-
-  const statusMap = {
-    PENDING: { text: "Pending" },
-    PAID: { text: "Paid" },
-    SHIPPED: { text: "Shipped" },
-    COMPLETED: { text: "Completed" },
-    CANCELED: { text: "Canceled" },
-  } as const;
-
-  const getStatusBadge = (status: OrderStatus) => (
-    <div
-      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${statusVariants[status]}`}
-    >
-      {statusMap[status].text}
-    </div>
-  );
 
   if (loading) {
     return (

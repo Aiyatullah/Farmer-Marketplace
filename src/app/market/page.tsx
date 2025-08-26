@@ -100,7 +100,7 @@ export default function MarketPage() {
         setError((e as Error)?.message || "Failed to load products");
       } finally {
         setLoading(false);
-      }
+      } 
     })();
   }, []);
 
@@ -227,7 +227,7 @@ export default function MarketPage() {
   return (
     // Page-level Cart Sheet
     <>
-      <Sheet>
+    <Sheet>
         <div className="relative">
           {/* Hero section */}
           <div className="bg-gradient-to-b from-primary/10 via-background to-background">
@@ -353,88 +353,88 @@ export default function MarketPage() {
           </div>
 
           {/* Cart Sheet content */}
-          <SheetContent className="flex flex-col">
-            <SheetHeader>
-              <SheetTitle>Your Cart ({cart.length})</SheetTitle>
-            </SheetHeader>
-            <Separator />
-            {cart.length === 0 ? (
-              <div className="flex flex-1 items-center justify-center">
-                <p className="text-muted-foreground">Your cart is empty.</p>
-              </div>
-            ) : (
-              <div className="flex-1 overflow-y-auto pr-4 -mr-4">
-                {cart.map((item) => (
-                  <div
-                    key={item.product.id}
-                    className="flex items-center justify-between gap-4 py-4"
-                  >
-                    <div className="flex items-center gap-4">
-                      <div className="relative h-16 w-16 rounded-md overflow-hidden">
+        <SheetContent className="flex flex-col">
+          <SheetHeader>
+            <SheetTitle>Your Cart ({cart.length})</SheetTitle>
+          </SheetHeader>
+          <Separator />
+          {cart.length === 0 ? (
+            <div className="flex flex-1 items-center justify-center">
+              <p className="text-muted-foreground">Your cart is empty.</p>
+            </div>
+          ) : (
+            <div className="flex-1 overflow-y-auto pr-4 -mr-4">
+              {cart.map((item) => (
+                <div
+                  key={item.product.id}
+                  className="flex items-center justify-between gap-4 py-4"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="relative h-16 w-16 rounded-md overflow-hidden">
                         <Image
-                          src={item.product.image || PLACEHOLDER_IMAGE}
-                          alt={item.product.name}
+                        src={item.product.image || PLACEHOLDER_IMAGE}
+                        alt={item.product.name}
                           fill
                           sizes="64px"
                           className="object-cover"
-                        />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold">{item.product.name}</h3>
-                        <p className="text-sm text-muted-foreground">
-                          ${item.product.price.toFixed(2)}
-                        </p>
-                      </div>
+                      />
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        className="h-6 w-6"
-                        onClick={() => updateQuantity(item.product.id, -1)}
-                      >
-                        <Minus className="h-4 w-4" />
-                      </Button>
-                      <span className="w-6 text-center">{item.quantity}</span>
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        className="h-6 w-6"
-                        disabled={item.quantity >= item.product.stock}
-                        onClick={() => updateQuantity(item.product.id, 1)}
-                      >
-                        <Plus className="h-4 w-4" />
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-8 w-8 text-destructive hover:text-destructive"
-                        onClick={() =>
-                          updateQuantity(item.product.id, -item.quantity)
-                        }
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
+                    <div>
+                      <h3 className="font-semibold">{item.product.name}</h3>
+                      <p className="text-sm text-muted-foreground">
+                        ${item.product.price.toFixed(2)}
+                      </p>
                     </div>
                   </div>
-                ))}
-              </div>
-            )}
-            {cart.length > 0 && (
-              <SheetFooter className="mt-auto">
-                <div className="w-full space-y-4">
-                  <Separator />
-                  <div className="flex justify-between font-semibold">
-                    <span>Subtotal</span>
-                    <span>${subtotal.toFixed(2)}</span>
+                  <div className="flex items-center gap-2">
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="h-6 w-6"
+                      onClick={() => updateQuantity(item.product.id, -1)}
+                    >
+                      <Minus className="h-4 w-4" />
+                    </Button>
+                    <span className="w-6 text-center">{item.quantity}</span>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="h-6 w-6"
+                      disabled={item.quantity >= item.product.stock}
+                      onClick={() => updateQuantity(item.product.id, 1)}
+                    >
+                      <Plus className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-8 w-8 text-destructive hover:text-destructive"
+                      onClick={() =>
+                        updateQuantity(item.product.id, -item.quantity)
+                      }
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
                   </div>
-                  <Button className="w-full" size="lg" onClick={handleCheckout}>
-                    Proceed to Checkout
-                  </Button>
                 </div>
-              </SheetFooter>
-            )}
-          </SheetContent>
+              ))}
+            </div>
+          )}
+          {cart.length > 0 && (
+            <SheetFooter className="mt-auto">
+              <div className="w-full space-y-4">
+                <Separator />
+                <div className="flex justify-between font-semibold">
+                  <span>Subtotal</span>
+                  <span>${subtotal.toFixed(2)}</span>
+                </div>
+                <Button className="w-full" size="lg" onClick={handleCheckout}>
+                  Proceed to Checkout
+                </Button>
+              </div>
+            </SheetFooter>
+          )}
+        </SheetContent>
 
           {/* Quick View Sheet */}
           <Sheet
@@ -454,8 +454,8 @@ export default function MarketPage() {
                         className="object-cover"
                       />
                     </AspectRatio>
-                  </div>
-                  <div>
+          </div>
+          <div>
                     <h3 className="text-xl font-semibold">{quickView.name}</h3>
                     <div className="flex items-center gap-2 text-sm text-muted-foreground mt-1">
                       <MapPin className="h-4 w-4" /> {quickView.location}
@@ -480,14 +480,14 @@ export default function MarketPage() {
                         {productRating(quickView.id).toFixed(1)} / 5
                       </span>
                     </div>
-                  </div>
+          </div>
                   <div className="flex items-center justify-between">
                     <span className="text-2xl font-bold">
                       ${quickView.price.toFixed(2)}
                     </span>
                     <span className="text-xs text-muted-foreground">
                       In stock: {quickView.stock}
-                    </span>
+              </span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Button
@@ -508,8 +508,8 @@ export default function MarketPage() {
                         ? "Added"
                         : "Add to cart"}
                     </Button>
-                  </div>
-                </div>
+          </div>
+        </div>
               )}
             </SheetContent>
           </Sheet>
@@ -517,23 +517,23 @@ export default function MarketPage() {
           {/* Product grid */}
           <div className="container mx-auto px-4 pb-12">
             {sortedProducts.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {sortedProducts.map((product) => (
                   <Card
                     key={product.id}
                     className="group flex flex-col overflow-hidden transition-all hover:shadow-lg hover:-translate-y-0.5"
                   >
-                    <CardHeader className="p-0">
+                <CardHeader className="p-0">
                       <div className="relative">
-                        <AspectRatio ratio={4 / 3}>
+                  <AspectRatio ratio={4 / 3}>
                           <Image
-                            src={product.image || PLACEHOLDER_IMAGE}
-                            alt={product.name}
+                      src={product.image || PLACEHOLDER_IMAGE}
+                      alt={product.name}
                             fill
                             sizes="(max-width: 768px) 100vw, 400px"
                             className="object-cover"
-                          />
-                        </AspectRatio>
+                    />
+                  </AspectRatio>
                         <Button
                           variant="secondary"
                           size="icon"
@@ -548,8 +548,8 @@ export default function MarketPage() {
                           </span>
                         )}
                       </div>
-                    </CardHeader>
-                    <CardContent className="pt-6 flex-1">
+                </CardHeader>
+                <CardContent className="pt-6 flex-1">
                       <div className="flex items-start justify-between gap-2">
                         <div>
                           <h3 className="text-lg font-semibold line-clamp-1">
@@ -558,7 +558,7 @@ export default function MarketPage() {
                           <div className="mt-1 flex items-center gap-2 text-xs text-muted-foreground">
                             <span className="inline-flex items-center gap-1">
                               <MapPin className="h-3.5 w-3.5" />
-                              {product.location}
+                    {product.location}
                             </span>
                             <span>•</span>
                             <span className="inline-flex items-center gap-1">
@@ -583,14 +583,14 @@ export default function MarketPage() {
                           </div>
                         </div>
                       </div>
-                      <p className="text-xs text-muted-foreground mt-1">
-                        In stock: {product.stock}
-                      </p>
-                    </CardContent>
-                    <CardFooter className="flex justify-between items-center">
-                      <p className="text-xl font-bold">
-                        ${product.price.toFixed(2)}
-                      </p>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    In stock: {product.stock}
+                  </p>
+                </CardContent>
+                <CardFooter className="flex justify-between items-center">
+                  <p className="text-xl font-bold">
+                    ${product.price.toFixed(2)}
+                  </p>
                       <div className="flex items-center gap-2">
                         <Button
                           variant="outline"
@@ -598,8 +598,8 @@ export default function MarketPage() {
                         >
                           Quick View
                         </Button>
-                        <Button
-                          onClick={() => handleAddToCart(product)}
+                  <Button
+                    onClick={() => handleAddToCart(product)}
                           disabled={
                             countInCart(product.id) >= product.stock ||
                             product.stock === 0
@@ -609,25 +609,25 @@ export default function MarketPage() {
                               ? "secondary"
                               : "default"
                           }
-                        >
-                          <ShoppingCart className="mr-2 h-4 w-4" />
-                          {product.stock === 0
+                  >
+                    <ShoppingCart className="mr-2 h-4 w-4" />
+                    {product.stock === 0
                             ? "Out"
-                            : countInCart(product.id) > 0
-                            ? "Added"
-                            : "Add"}
-                        </Button>
+                      : countInCart(product.id) > 0
+                      ? "Added"
+                      : "Add"}
+                  </Button>
                       </div>
-                    </CardFooter>
-                  </Card>
-                ))}
-              </div>
-            ) : (
-              <div className="text-center py-16">
-                <h2 className="text-2xl font-semibold">No Products Found</h2>
-                <p className="text-muted-foreground">
-                  Try adjusting your filters to find what youre looking for.
-                </p>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-16">
+            <h2 className="text-2xl font-semibold">No Products Found</h2>
+            <p className="text-muted-foreground">
+              Try adjusting your filters to find what youre looking for.
+            </p>
                 <Button
                   className="mt-4"
                   onClick={() => {
@@ -639,11 +639,11 @@ export default function MarketPage() {
                 >
                   Clear filters
                 </Button>
-              </div>
-            )}
           </div>
-        </div>
-      </Sheet>
+        )}
+          </div>
+      </div>
+    </Sheet>
     </>
   );
 }

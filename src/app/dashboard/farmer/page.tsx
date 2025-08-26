@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useEffect, useState } from "react";
@@ -13,20 +14,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Loader2 } from "lucide-react";
-import { toast } from "sonner";
-
-type Product = {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  quantity: number;
-  category: string;
-  location: string;
-  image?: string | null;
-  createdAt: string;
-  updatedAt: string;
-};
 
 export default function FarmerDashboard() {
   const router = useRouter();
@@ -45,7 +32,6 @@ export default function FarmerDashboard() {
     location: "",
   });
   const [userName, setUserName] = useState<string>("Farmer");
-  const [userRole, setUserRole] = useState<"CUSTOMER" | "FARMER" | null>(null);
 
   useEffect(() => {
     let mounted = true;
@@ -69,7 +55,6 @@ export default function FarmerDashboard() {
         const me = await meRes.json();
         if (!mounted) return;
         setUserName(me.session?.user?.name ?? "Farmer");
-        setUserRole(me.role ?? null);
 
         if (me.role !== "FARMER") {
           // Redirect non-farmers away
