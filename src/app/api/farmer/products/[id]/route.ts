@@ -25,13 +25,13 @@ async function requireFarmer(request: NextRequest) {
 
 export async function DELETE(
   request: NextRequest,
-  context: { params: { id: string } }
-) {
+  { params }: { params: { id: string } }
+): Promise<NextResponse> {
   const check = await requireFarmer(request);
   if ("error" in check) return check.error;
 
   const { session } = check;
-  const id = context.params.id;
+  const id = params.id;
 
   const product = await db.product.findUnique({ where: { id } });
   if (!product || product.farmerId !== session!.user.id) {
