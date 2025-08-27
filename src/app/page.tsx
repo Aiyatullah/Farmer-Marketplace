@@ -143,21 +143,6 @@ export default async function HomePage() {
           </div>
         </section>
       </div>
-
-      <footer className="border-t py-6 md:py-8">
-        <div className="container px-4 mx-auto">
-          <div className="flex flex-col items-center justify-between md:flex-row">
-            <div className="mb-4 md:mb-0">
-              <span className="font-bold text-lg bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
-                FarmConnect
-              </span>
-            </div>
-            <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} FarmConnect. All rights reserved.
-            </p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
