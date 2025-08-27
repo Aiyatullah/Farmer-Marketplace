@@ -5,7 +5,6 @@ const nextConfig: NextConfig = {
     // unsplash public images
     domains: ["images.unsplash.com"],
     formats: ["image/avif", "image/webp"],
-    dangerouslyAllowSVG: true,
   },
   /* config options here */
 };
