@@ -3,6 +3,9 @@ import { auth } from "@/../lib/auth";
 import { Role } from "@prisma/client";
 import { db } from "../../../../../../lib/db";
 
+type ParamContext =
+  | { params: { id: string } }
+  | { params: Promise<{ id: string }> };
 
 export async function DELETE(
   request: NextRequest,
