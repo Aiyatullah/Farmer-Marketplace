@@ -8,7 +8,8 @@ export default async function HomePage() {
     headers: await headers(),
   });
   
-  const userRole = session?.user?.role || '';
+  const userRole = (session?.user as { role?: string })?.role || "";
+
 
   return (
     <div className="relative flex min-h-screen flex-col bg-background">

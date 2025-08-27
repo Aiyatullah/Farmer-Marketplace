@@ -93,21 +93,26 @@ export function AuthForm() {
     }
   };
 
-  const handleGoogleSignIn = async () => {
-    setIsLoading(true);
-    try {
-      const result = await authClient.signIn.social({ provider: "google" });
-      if (result?.url) {
-        window.location.href = result.url;
-      } else {
-        setError("Could not sign in with Google.");
-        setIsLoading(false);
-      }
-    } catch (e) {
-      setError("Could not sign in with Google."+e);
-      setIsLoading(false);
-    }
-  };
+const handleGoogleSignIn = async () => {
+  setIsLoading(true);
+  try {
+    const result = await authClient.signIn.social({ provider: "google" });
+
+  if ("url" in result && typeof result.url === "string") {
+    window.location.href = result.url;
+  } else {
+    setError("Could not sign in with Google.");
+    setIsLoading(false);
+  }
+  } catch (e: unknown) {
+  if (e instanceof Error) {
+    setError("Could not sign in with Google. " + e.message);
+  } else {
+    setError("Could not sign in with Google. " + String(e));
+  }
+  setIsLoading(false);
+}
+};
 
   return (
     <div className="flex min-h-screen w-full items-center justify-center bg-background px-4">

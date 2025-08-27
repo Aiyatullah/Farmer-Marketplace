@@ -1,18 +1,52 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { Metadata } from "next";
 import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 
+// Define proper types
+interface User {
+  id: string;
+  name?: string;
+  email: string;
+  createdAt: string;
+}
+
+interface Order {
+  id: string;
+  userId: string;
+  total: number;
+  status: string;
+}
+
+interface Product {
+  id: string;
+  name: string;
+  category: string;
+  location: string;
+  quantity: number;
+  price: number;
+}
+
+interface Counts {
+  userCount: number;
+  productCount: number;
+  orderCount: number;
+}
+
+interface AdminOverview {
+  users: User[];
+  products: Product[];
+  orders: Order[];
+  counts: Counts;
+}
 
 export default function AdminDashboard() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [data, setData] = useState<any | null>(null);
+  const [data, setData] = useState<AdminOverview | null>(null);
 
   useEffect(() => {
     let mounted = true;
@@ -41,10 +75,14 @@ export default function AdminDashboard() {
         if (!res.ok) {
           throw new Error("Failed to load admin data");
         }
-        const j = await res.json();
+        const j: AdminOverview = await res.json();
         if (mounted) setData(j);
-      } catch (e: any) {
-        if (mounted) setError(e?.message || "Failed to load admin dashboard");
+      } catch (e: unknown) {
+        if (mounted) {
+          const errMsg =
+            e instanceof Error ? e.message : "Failed to load admin dashboard";
+          setError(errMsg);
+        }
       } finally {
         if (mounted) setLoading(false);
       }
@@ -128,7 +166,7 @@ export default function AdminDashboard() {
                   </tr>
                 </thead>
                 <tbody>
-                  {users.map((u: any) => (
+                  {users.map((u) => (
                     <tr key={u.id} className="border-t">
                       <td className="py-2 pr-4">{u.name || "—"}</td>
                       <td className="py-2 pr-4">{u.email}</td>
@@ -158,7 +196,7 @@ export default function AdminDashboard() {
                   </tr>
                 </thead>
                 <tbody>
-                  {orders.map((o: any) => (
+                  {orders.map((o) => (
                     <tr key={o.id} className="border-t">
                       <td className="py-2 pr-4">{o.id.slice(0, 8)}…</td>
                       <td className="py-2 pr-4">{o.userId.slice(0, 8)}…</td>
@@ -190,7 +228,7 @@ export default function AdminDashboard() {
                 </tr>
               </thead>
               <tbody>
-                {products.map((p: any) => (
+                {products.map((p) => (
                   <tr key={p.id} className="border-t">
                     <td className="py-2 pr-4">{p.name}</td>
                     <td className="py-2 pr-4">{p.category}</td>

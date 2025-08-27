@@ -18,13 +18,13 @@ import {
 
 import { OrderStatus } from "@/components/OrderCard";
 
-const statusVariants = {
-  PENDING: "bg-yellow-100 text-yellow-800 hover:bg-yellow-100",
-  PAID: "bg-blue-100 text-blue-800 hover:bg-blue-100",
-  SHIPPED: "bg-indigo-100 text-indigo-800 hover:bg-indigo-100",
-  COMPLETED: "bg-green-100 text-green-800 hover:bg-green-100",
-  CANCELED: "bg-red-100 text-red-800 hover:bg-red-100",
-} as const;
+// const statusVariants = {
+//   PENDING: "bg-yellow-100 text-yellow-800 hover:bg-yellow-100",
+//   PAID: "bg-blue-100 text-blue-800 hover:bg-blue-100",
+//   SHIPPED: "bg-indigo-100 text-indigo-800 hover:bg-indigo-100",
+//   COMPLETED: "bg-green-100 text-green-800 hover:bg-green-100",
+//   CANCELED: "bg-red-100 text-red-800 hover:bg-red-100",
+// } as const;
 
 interface Product {
   id: string;
