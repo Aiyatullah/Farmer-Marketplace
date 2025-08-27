@@ -28,8 +28,9 @@ export default async function RootLayout({
 }>) {
   const session = await auth.api.getSession({
     headers: await headers(),
-  });
-  const userRole = session?.user?.role || '';
+  });  
+  const userRole = (session?.user as { role?: string })?.role || "";
+
 
   return (
     <html lang="en" suppressHydrationWarning>
