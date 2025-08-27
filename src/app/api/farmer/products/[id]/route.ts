@@ -3,7 +3,11 @@ import { auth } from "@/../lib/auth";
 import { Role } from "@prisma/client";
 import { db } from "../../../../../../lib/db";
 
-async function requireFarmer(request: NextRequest) {
+type FarmerCheck =
+  | { error: NextResponse }
+  | { session: NonNullable<Awaited<ReturnType<typeof auth.api.getSession>>> };
+
+async function requireFarmer(request: NextRequest): Promise<FarmerCheck> {
   const session = await auth.api.getSession({ headers: request.headers });
   if (!session) {
     return {
@@ -34,7 +38,7 @@ export async function DELETE(
   const id = params.id;
 
   const product = await db.product.findUnique({ where: { id } });
-  if (!product || product.farmerId !== session!.user.id) {
+  if (!product || product.farmerId !== session.user.id) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
 
